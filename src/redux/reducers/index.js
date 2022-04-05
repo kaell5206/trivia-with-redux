@@ -3,6 +3,12 @@ import { SAVE_TOKEN, REQUEST_TOKEN } from '../actions';
 const INITIAL_STATE = {
   token: '',
   isLoading: false,
+  player: {
+    name: '',
+    assertions: '',
+    score: 0,
+    gravatarEmail: '',
+  },
 };
 
 const reduceToken = (state = INITIAL_STATE, action) => {
