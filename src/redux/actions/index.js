@@ -1,5 +1,6 @@
 export const REQUEST_TOKEN = 'REQUEST_TOKEN';
 export const SAVE_TOKEN = 'SAVE_TOKEN';
+export const SAVE_PROFILE = 'SAVE_PROFILE';
 
 export const requestToken = () => ({
   type: REQUEST_TOKEN,
@@ -20,3 +21,11 @@ export const fetchToken = () => async (dispatch) => {
     console.log(error);
   }
 };
+
+export const saveProfile = (name, email) => ({
+  type: SAVE_PROFILE,
+  payload: {
+    name,
+    gravatarEmail: email,
+  },
+});

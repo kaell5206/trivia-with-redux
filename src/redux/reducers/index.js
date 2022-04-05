@@ -1,4 +1,4 @@
-import { SAVE_TOKEN, REQUEST_TOKEN } from '../actions';
+import { SAVE_TOKEN, REQUEST_TOKEN, SAVE_PROFILE } from '../actions';
 
 const INITIAL_STATE = {
   token: '',
@@ -24,6 +24,14 @@ const reduceToken = (state = INITIAL_STATE, action) => {
       ...state,
       token: action.payload,
       isLoading: false,
+    };
+  case SAVE_PROFILE:
+    return {
+      ...state,
+      player: {
+        ...state.player,
+        ...action.payload,
+      },
     };
 
   default:
