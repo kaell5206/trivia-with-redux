@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import logo from '../trivia.png';
+import { fetchToken } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -28,6 +30,7 @@ class Login extends React.Component {
 
   render() {
     const { name, email, buttonDisabled } = this.state;
+    const { buttonLogin } = this.props;
     return (
 
       <header className="App-header">
@@ -57,15 +60,23 @@ class Login extends React.Component {
             />
           </label>
           <br />
-          <button
-            data-testid="btn-play"
-            type="button"
-            disabled={ buttonDisabled }
-          >
-            Play
-          </button>
+          <Link to="/">
+            <button
+              data-testid="btn-play"
+              type="button"
+              disabled={ buttonDisabled }
+              onClick={ buttonLogin }
+            >
+              Play
+            </button>
+          </Link>
           <Link to="/settings">
-            <button data-testid="btn-settings" type="button">Configurações</button>
+            <button
+              data-testid="btn-settings"
+              type="button"
+            >
+              Configurações
+            </button>
           </Link>
         </div>
       </header>
@@ -74,4 +85,8 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  buttonLogin: () => dispatch(fetchToken()),
+});
+
+export default connect(null, mapDispatchToProps)(Login);
