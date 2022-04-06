@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../trivia.png';
-import { fetchToken } from '../redux/actions';
+import { fetchToken, saveProfile } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -29,9 +29,16 @@ class Login extends React.Component {
     });
   }
 
+  handleClick = () => {
+    const { sendProfile, buttonLogin } = this.props;
+    const { name, email } = this.state;
+    sendProfile(name, email);
+    buttonLogin();
+  }
+
   render() {
     const { name, email, buttonDisabled } = this.state;
-    const { buttonLogin } = this.props;
+
     return (
 
       <header className="App-header">
@@ -61,12 +68,12 @@ class Login extends React.Component {
             />
           </label>
           <br />
-          <Link to="/">
+          <Link to="/game">
             <button
               data-testid="btn-play"
               type="button"
               disabled={ buttonDisabled }
-              onClick={ buttonLogin }
+              onClick={ this.handleClick }
             >
               Play
             </button>
@@ -86,12 +93,18 @@ class Login extends React.Component {
   }
 }
 
+const mapStateToProps = (state) => ({
+  token: state.token,
+});
+
 const mapDispatchToProps = (dispatch) => ({
   buttonLogin: () => dispatch(fetchToken()),
+  sendProfile: (name, email) => dispatch(saveProfile(name, email)),
 });
 
 Login.propTypes = {
   buttonLogin: PropTypes.func.isRequired,
+  sendProfile: PropTypes.func.isRequired,
 };
 
-export default connect(null, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
