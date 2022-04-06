@@ -2,30 +2,37 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import { fetchQuestions, fetchToken } from '../redux/actions';
+import { fetchQuestions } from '../redux/actions';
+
+const negative = -1;
+let indexes = [negative, 0, 1, 2];
 
 class Game extends Component {
   constructor() {
     super();
     this.state = {
       index: 0,
+      correct: '',
+      incorrect: '',
     };
   }
 
-  componentDidMount() {
-    const { getQuestions, token, questionCode, getNewToken } = this.props;
-    const invalidToken = 3;
+  /* componentDidMount() {
+    const { getQuestions, token } = this.props;
     getQuestions(token);
-    if (questionCode === invalidToken) {
-      getNewToken();
-      getQuestions(token);
-    }
-  }
+  } */
 
   handleClick = () => {
-    this.setState((prevState) => ({
+    const time = 10000;
+    this.setState({
+      correct: 'correctAnswer',
+      incorrect: 'incorrectAnswer',
+    });
+    setTimeout(() => this.setState((prevState) => ({
       index: prevState.index + 1,
-    }));
+      correct: '',
+      incorrect: '',
+    })), time);
   }
 
   // Fonte da função shuffle: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -47,31 +54,34 @@ class Game extends Component {
   }
 
   answersButtons = (correctAnswer, incorrectAnswers) => {
+    const { correct, incorrect } = this.state;
     const min = 1;
-    const negative = -1;
-    let indexes = [negative, 0, 1, 2];
     if (incorrectAnswers.length === min) {
       indexes = [negative, 0];
     }
-    indexes = this.shuffle(indexes);
-
+    if (correct === '') { indexes = this.shuffle(indexes); }
     return indexes.map((index) => {
       if (index === negative) {
         return (
           <button
+            name="correct"
             type="button"
             data-testid="correct-answer"
+            key={ correctAnswer }
             onClick={ this.handleClick }
+            className={ correct }
           >
             {correctAnswer}
           </button>);
       }
       return (
         <button
+          name="incorrect"
           type="button"
           data-testid={ `wrong-answer-${index}` }
           key={ incorrectAnswers[index] }
           onClick={ this.handleClick }
+          className={ incorrect }
         >
           {incorrectAnswers[index]}
         </button>);
@@ -119,19 +129,15 @@ class Game extends Component {
 const mapStateToProps = (state) => ({
   token: state.token,
   questionResults: state.questions.results,
-  questionCode: state.questions.response_code,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
-  getNewToken: () => dispatch(fetchToken()),
 });
 
 Game.propTypes = {
   questionResults: PropTypes.arrayOf(PropTypes.any),
-  questionCode: PropTypes.number,
   getQuestions: PropTypes.func,
-  getNewToken: PropTypes.func,
   token: PropTypes.string,
 }.isRequired;
 

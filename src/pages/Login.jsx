@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../trivia.png';
-import { fetchToken, saveProfile } from '../redux/actions';
+import { fetchToken, saveProfile, fetchQuestions } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -13,6 +13,11 @@ class Login extends React.Component {
       email: '',
       buttonDisabled: true,
     };
+  }
+
+  componentDidMount() {
+    const { getApiToken } = this.props;
+    getApiToken();
   }
 
   handleChange = ({ target }) => {
@@ -30,10 +35,10 @@ class Login extends React.Component {
   }
 
   handleClick = () => {
-    const { sendProfile, buttonLogin } = this.props;
+    const { sendProfile, token, getQuestions } = this.props;
     const { name, email } = this.state;
     sendProfile(name, email);
-    buttonLogin();
+    getQuestions(token);
   }
 
   render() {
@@ -98,13 +103,16 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  buttonLogin: () => dispatch(fetchToken()),
+  getApiToken: () => dispatch(fetchToken()),
   sendProfile: (name, email) => dispatch(saveProfile(name, email)),
+  getQuestions: (token) => dispatch(fetchQuestions(token)),
 });
 
 Login.propTypes = {
-  buttonLogin: PropTypes.func.isRequired,
+  getApiToken: PropTypes.func.isRequired,
   sendProfile: PropTypes.func.isRequired,
+  getQuestions: PropTypes.func.isRequired,
+  token: PropTypes.string.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);
