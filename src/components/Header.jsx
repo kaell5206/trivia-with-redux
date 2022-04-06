@@ -7,15 +7,11 @@ class Header extends Component {
   render() {
     const { user, userEmail, score } = this.props;
     const imgGravatar = md5(userEmail).toString();
-    console.log(imgGravatar);
+
     return (
       <div>
         <h3 data-testid="header-player-name">
           {user}
-          {' '}
-          e
-          {' '}
-          {userEmail}
         </h3>
         <h3 data-testid="header-score">{score}</h3>
         <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${imgGravatar}` } alt="" />
