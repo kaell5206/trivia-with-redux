@@ -3,6 +3,7 @@ export const SAVE_TOKEN = 'SAVE_TOKEN';
 export const SAVE_PROFILE = 'SAVE_PROFILE';
 export const FETCH_QUESTIONS = 'FETCH_QUESTIONS';
 export const SAVE_QUESTIONS = 'SAVE_QUESTIONS';
+export const SUM_SCORE = 'SUM_SCORE';
 
 // Actions para requisição de Token
 export const requestToken = () => ({
@@ -68,3 +69,11 @@ export const fetchQuestions = (token) => async (dispatch) => {
     console.log(error);
   }
 };
+
+// Action de soma do placar:
+
+export const saveScore = (score) => ({
+  type: SUM_SCORE,
+  payload: score,
+}
+);

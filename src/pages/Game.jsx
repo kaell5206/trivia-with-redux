@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
-import { fetchQuestions } from '../redux/actions';
+import { fetchQuestions, saveScore } from '../redux/actions';
 
 const negative = -1;
 let indexes = [negative, 0, 1, 2];
+const oneSecond = 1000;
+const maxTimer = 30;
 
 class Game extends Component {
   constructor() {
@@ -14,25 +16,55 @@ class Game extends Component {
       index: 0,
       correct: '',
       incorrect: '',
+      next: false,
+      buttonDisable: true,
+      timer: maxTimer,
+      codeInterval: 0,
     };
   }
 
-  /* componentDidMount() {
-    const { getQuestions, token } = this.props;
-    getQuestions(token);
-  } */
+  componentDidMount() {
+    this.startTimer();
+  }
 
-  handleClick = () => {
-    const time = 10000;
+  calculateScore = (difficulty) => {
+    const hardQuestion = 3;
+    const { timer } = this.state;
+    const correctAnswer = 10;
+    let levelQuestion = 1;
+    if (difficulty === 'hard') {
+      levelQuestion = hardQuestion;
+    } else if (difficulty === 'medium') {
+      levelQuestion = 2;
+    }
+    const sum = correctAnswer + (timer * levelQuestion);
+    return sum;
+  }
+
+  handleClick = ({ target }, difficulty) => {
+    const { sumScore } = this.props;
+    const { codeInterval } = this.state;
     this.setState({
       correct: 'correctAnswer',
       incorrect: 'incorrectAnswer',
+      next: true,
+      buttonDisable: true,
     });
-    setTimeout(() => this.setState((prevState) => ({
-      index: prevState.index + 1,
+    clearInterval(codeInterval);
+    if (target.name === 'correct') {
+      sumScore(this.calculateScore(difficulty));
+    }
+  }
+
+  nextQuestion = () => {
+    this.setState((state) => ({
       correct: '',
       incorrect: '',
-    })), time);
+      next: false,
+      index: state.index + 1,
+      timer: maxTimer,
+    }));
+    this.startTimer();
   }
 
   // Fonte da função shuffle: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
@@ -53,13 +85,41 @@ class Game extends Component {
     return array;
   }
 
-  answersButtons = (correctAnswer, incorrectAnswers) => {
-    const { correct, incorrect } = this.state;
+  startTimer = (time = oneSecond) => {
+    const codeInterval = setInterval(() => {
+      this.setState((state) => {
+        if (state.timer === 0) {
+          clearInterval(state.codeInterval);
+          this.setState({ buttonDisable: true });
+        } else {
+          return {
+            timer: state.timer - 1,
+          };
+        }
+      });
+    }, time);
+    this.setState({
+      codeInterval,
+    });
+  }
+
+  answersButtons = (correctAnswer, incorrectAnswers, difficulty) => {
+    const { correct, incorrect, buttonDisable, timer } = this.state;
     const min = 1;
-    if (incorrectAnswers.length === min) {
-      indexes = [negative, 0];
+    const fiveSeconds = 5000;
+
+    if (timer === maxTimer) {
+      if (incorrectAnswers.length === min) {
+        indexes = [negative, 0];
+      }
+      indexes = this.shuffle(indexes);
+      setTimeout(() => {
+        this.setState({
+          buttonDisable: false,
+        });
+      }, fiveSeconds);
     }
-    if (correct === '') { indexes = this.shuffle(indexes); }
+
     return indexes.map((index) => {
       if (index === negative) {
         return (
@@ -68,8 +128,9 @@ class Game extends Component {
             type="button"
             data-testid="correct-answer"
             key={ correctAnswer }
-            onClick={ this.handleClick }
+            onClick={ (event) => this.handleClick(event, difficulty) }
             className={ correct }
+            disabled={ buttonDisable }
           >
             {correctAnswer}
           </button>);
@@ -80,8 +141,9 @@ class Game extends Component {
           type="button"
           data-testid={ `wrong-answer-${index}` }
           key={ incorrectAnswers[index] }
-          onClick={ this.handleClick }
+          onClick={ (event) => this.handleClick(event, difficulty) }
           className={ incorrect }
+          disabled={ buttonDisable }
         >
           {incorrectAnswers[index]}
         </button>);
@@ -90,10 +152,11 @@ class Game extends Component {
 
   render() {
     const { questionResults } = this.props;
-    const { index } = this.state;
+    const { index, next, timer } = this.state;
     return (
       <div>
         <Header />
+        <p>{timer}</p>
         { questionResults
         && (
           <div>
@@ -116,11 +179,22 @@ class Game extends Component {
                 this.answersButtons(
                   questionResults[index].correct_answer,
                   questionResults[index].incorrect_answers,
+                  questionResults[index].difficulty,
                 )
               }
             </div>
           </div>
         )}
+        {next
+       && (
+         <button
+           type="button"
+           data-testid="btn-next"
+           onClick={ this.nextQuestion }
+         >
+           Next
+
+         </button>)}
       </div>
     );
   }
@@ -133,6 +207,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getQuestions: (token) => dispatch(fetchQuestions(token)),
+  sumScore: (score) => dispatch(saveScore(score)),
 });
 
 Game.propTypes = {
