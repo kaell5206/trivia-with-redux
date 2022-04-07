@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import logo from '../trivia.png';
-import { fetchToken, saveProfile, fetchQuestions } from '../redux/actions';
+import { fetchToken, saveProfile, fetchQuestions, resetScore } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -16,7 +16,8 @@ class Login extends React.Component {
   }
 
   componentDidMount() {
-    const { getApiToken } = this.props;
+    const { getApiToken, resetPlayer } = this.props;
+    resetPlayer();
     getApiToken();
   }
 
@@ -106,12 +107,14 @@ const mapDispatchToProps = (dispatch) => ({
   getApiToken: () => dispatch(fetchToken()),
   sendProfile: (name, email) => dispatch(saveProfile(name, email)),
   getQuestions: (token) => dispatch(fetchQuestions(token)),
+  resetPlayer: () => dispatch(resetScore()),
 });
 
 Login.propTypes = {
   getApiToken: PropTypes.func.isRequired,
   sendProfile: PropTypes.func.isRequired,
   getQuestions: PropTypes.func.isRequired,
+  resetPlayer: PropTypes.func.isRequired,
   token: PropTypes.string.isRequired,
 };
 

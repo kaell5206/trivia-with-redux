@@ -57,6 +57,9 @@ class Game extends Component {
   }
 
   nextQuestion = () => {
+    const { index } = this.state;
+    const { history } = this.props;
+    const maxIndex = 4;
     this.setState((state) => ({
       correct: '',
       incorrect: '',
@@ -65,6 +68,9 @@ class Game extends Component {
       timer: maxTimer,
     }));
     this.startTimer();
+    if (index === maxIndex) {
+      history.push('/feedback');
+    }
   }
 
   // Fonte da função shuffle: https://stackoverflow.com/questions/2450954/how-to-randomize-shuffle-a-javascript-array
