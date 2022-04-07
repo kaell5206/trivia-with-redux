@@ -1,4 +1,4 @@
-import { SAVE_PROFILE, SUM_SCORE } from '../actions';
+import { SAVE_PROFILE, SUM_SCORE, RESET_SCORE } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -18,7 +18,10 @@ const reducePlayer = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       score: state.score + action.payload,
+      assertions: state.assertions + 1,
     };
+  case RESET_SCORE:
+    return { ...INITIAL_STATE };
 
   default:
     return state;
