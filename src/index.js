@@ -1,3 +1,5 @@
+// TODO O PROJETO FOI REALIZADO EM PAIR PROGRAMMING COM PARTICIPAÇÃO DE TODOS OS INTEGRANTES DO GRUPO.
+
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
