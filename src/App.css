@@ -1,10 +1,81 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Lato&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Lato', sans-serif;
+}
 .App {
   text-align: center;
+  background-color: #362736;
+  height: 100vh;
+  color: #E3BAC6;
 }
 
 .App-logo {
-  height: 40vmin;
+  height: 25vmin;
   pointer-events: none;
+  margin-bottom: 10vh;
+}
+
+.login-container {
+  position: relative;
+}
+
+.login-form-container {
+  background-color: #E3BAC6;
+  padding: 20px 28px;
+  border-radius: 1.8vh;
+  z-index: 99;
+  position: relative;
+}
+
+.shadow {
+  padding: 80px 125px;
+  border-radius: 1.8vh;
+  background-color: #00000080;
+  position: absolute;
+  top: 10px;
+  filter: blur(0.4rem);
+  left: calc(2px + 2vmin);
+  bottom: calc(-26px + 2vmin);
+}
+
+.login-form-container label input {
+  margin: 12px 8px;
+  padding: 6px;
+  border-color: #6e356c7c;
+  border-radius: 0.8vh;
+  
+}
+
+.login-form-container label input::placeholder {
+  color: #16131dab;
+  font-weight: 600;
+}
+
+.login-form-container a button {
+  margin: 0 8px;
+  padding: 6px 14px;
+  font-weight: 600;
+  color: #E3BAC6;
+  background-color: #6e356c;
+  border-style: none;
+  border-radius: 0.8vh;
+}
+
+.login-form-container a button:disabled {
+  background-color: #922828;
+}
+
+.login-form-container a button:hover {
+  background-color: #8a4287;
+}
+
+.login-form-container a button:disabled:hover {
+  background-color: #772121;
 }
 
 .red-border {
@@ -24,11 +95,11 @@
 
 .App-header {
   align-items: center;
-  background-color: #282c34;
+  background-color: #4B244A;
   color: white;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(8px + 2vmin);
   justify-content: center;
   min-height: 100vh;
 }
@@ -62,4 +133,73 @@
 
 .incorrectAnswer {
   border: 3px solid red;
+}
+
+
+/* Game page css */
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  background-color: #4B244A;
+  align-items: center;
+  color: #E3BAC6;
+}
+
+.header-container div {
+  display: flex;
+  align-items: center;
+}
+
+.header-container div h3, .header-container div img {
+  margin: 0 5px;
+}
+
+.header-container div img {
+  width: 40px;
+}
+
+.score {
+  background-color: #2fc941;
+  padding: 20px;
+  color: #16131D;
+}
+
+.red {
+  color: rgb(255, 0, 0);
+}
+
+.timer  {
+  margin-top: 14px;
+  font-size: calc(44px + 2vmin);
+  font-weight: 600;
+  font-family: 'Fredoka One', cursive;
+  height: 86px;
+}
+
+.tickAnimation {
+  animation: tickAnimation 1s infinite;
+}
+
+.question-category {
+  font-size: calc(14px + 2vmin);
+  margin-bottom: 15px;
+}
+
+.question-text {
+  font-size: calc(18px + 2vmin);
+  margin-bottom: 15px;
+}
+
+@keyframes tickAnimation {
+  from { font-size: calc(44px + 2vmin); }
+  to { font-size: calc(56px + 2vmin);};
+}
+
+@media screen and (min-width: 768px ) {
+  .questions-container {
+    width: 60%;
+    margin: auto;
+  }
 }

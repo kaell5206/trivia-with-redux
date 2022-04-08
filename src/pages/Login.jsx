@@ -49,50 +49,53 @@ class Login extends React.Component {
 
       <header className="App-header">
         <img src={ logo } className="App-logo" alt="logo" />
-        <div>
-          <label htmlFor="name">
-            Nome:
-            <input
-              name="name"
-              data-testid="input-player-name"
-              id="name"
-              type="text"
-              value={ name }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <br />
-          <label htmlFor="email">
-            E-mail:
-            <input
-              name="email"
-              data-testid="input-gravatar-email"
-              id="email"
-              type="email"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <br />
-          <Link to="/game">
-            <button
-              data-testid="btn-play"
-              type="button"
-              disabled={ buttonDisabled }
-              onClick={ this.handleClick }
-            >
-              Play
-            </button>
-          </Link>
-          <Link to="/settings">
-            <button
-              data-testid="btn-settings"
-              type="button"
-            >
-              Configurações
-            </button>
-          </Link>
-        </div>
+        <section className="login-container">
+          <div className="login-form-container">
+            <label htmlFor="name">
+              <input
+                name="name"
+                data-testid="input-player-name"
+                id="name"
+                type="text"
+                value={ name }
+                onChange={ this.handleChange }
+                placeholder="Nome"
+              />
+            </label>
+            <br />
+            <label htmlFor="email">
+              <input
+                name="email"
+                data-testid="input-gravatar-email"
+                id="email"
+                type="email"
+                value={ email }
+                onChange={ this.handleChange }
+                placeholder="E-mail"
+              />
+            </label>
+            <br />
+            <Link to="/game">
+              <button
+                data-testid="btn-play"
+                type="button"
+                disabled={ buttonDisabled }
+                onClick={ this.handleClick }
+              >
+                Play
+              </button>
+            </Link>
+            <Link to="/settings">
+              <button
+                data-testid="btn-settings"
+                type="button"
+              >
+                Configurações
+              </button>
+            </Link>
+          </div>
+          <div className="shadow" />
+        </section>
       </header>
 
     );

@@ -9,12 +9,20 @@ class Header extends Component {
     const imgGravatar = md5(userEmail).toString();
 
     return (
-      <div>
-        <h3 data-testid="header-player-name">
-          {user}
-        </h3>
-        <h3 data-testid="header-score">{score}</h3>
-        <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${imgGravatar}` } alt="" />
+      <div className="header-container">
+        <div className="user-container">
+          <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${imgGravatar}` } alt="" />
+          <h3 data-testid="header-player-name">
+            user
+          </h3>
+        </div>
+        <div className="score">
+          <h3 data-testid="header-score">
+            Pontuação:
+            {' '}
+            {score}
+          </h3>
+        </div>
       </div>
     );
   }

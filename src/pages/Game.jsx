@@ -27,6 +27,24 @@ class Game extends Component {
     this.startTimer();
   }
 
+  timerWithColor = () => {
+    const { timer } = this.state;
+    const min = 9;
+    if (timer <= min && timer > 0) {
+      return (
+        <p className="timer red tickAnimation">{timer}</p>
+      );
+    }
+    if (timer === 0) {
+      return (
+        <p className="timer red">{timer}</p>
+      );
+    }
+    return (
+      <p className="timer">{timer}</p>
+    );
+  }
+
   calculateScore = (difficulty) => {
     const hardQuestion = 3;
     const { timer } = this.state;
@@ -135,7 +153,7 @@ class Game extends Component {
             data-testid="correct-answer"
             key={ correctAnswer }
             onClick={ (event) => this.handleClick(event, difficulty) }
-            className={ correct }
+            className={ `${correct} answer-btn` }
             disabled={ buttonDisable }
           >
             {correctAnswer}
@@ -148,7 +166,7 @@ class Game extends Component {
           data-testid={ `wrong-answer-${index}` }
           key={ incorrectAnswers[index] }
           onClick={ (event) => this.handleClick(event, difficulty) }
-          className={ incorrect }
+          className={ `${incorrect} answer-btn` }
           disabled={ buttonDisable }
         >
           {incorrectAnswers[index]}
@@ -162,25 +180,32 @@ class Game extends Component {
     return (
       <div>
         <Header />
-        <p>{timer}</p>
+        <div>
+          { this.timerWithColor() }
+        </div>
         { questionResults
         && (
-          <div>
-            <div>
+          <div className="questions-container">
+            <div className="question">
               <p
+                className="question-category"
                 data-testid="question-category"
               >
                 {questionResults[index].category}
 
               </p>
               <p
+                className="question-text"
                 data-testid="question-text"
               >
                 {questionResults[index].question}
 
               </p>
             </div>
-            <div data-testid="answer-options">
+            <div
+              className="answer-options"
+              data-testid="answer-options"
+            >
               {
                 this.answersButtons(
                   questionResults[index].correct_answer,
@@ -197,6 +222,7 @@ class Game extends Component {
            type="button"
            data-testid="btn-next"
            onClick={ this.nextQuestion }
+           className="btn-next"
          >
            Next
 
