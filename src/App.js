@@ -11,6 +11,8 @@ import Ranking from './pages/Ranking';
 export default function App() {
   return (
     <div className="App">
+      {/* <div className="test" /> */}
+      {/* <img src="./" alt="" /> */}
       <Switch>
         <Route exact path="/" component={ Login } />
         <Route path="/settings" component={ Settings } />

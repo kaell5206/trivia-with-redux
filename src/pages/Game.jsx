@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { fetchQuestions, saveScore } from '../redux/actions';
 
+const he = require('he');
+
 const negative = -1;
 let indexes = [negative, 0, 1, 2];
 const oneSecond = 1000;
@@ -147,30 +149,34 @@ class Game extends Component {
     return indexes.map((index) => {
       if (index === negative) {
         return (
-          <button
-            name="correct"
-            type="button"
-            data-testid="correct-answer"
-            key={ correctAnswer }
-            onClick={ (event) => this.handleClick(event, difficulty) }
-            className={ `${correct} answer-btn` }
-            disabled={ buttonDisable }
-          >
-            {correctAnswer}
-          </button>);
+          <div className={ `${correct}` }>
+            <button
+              name="correct"
+              type="button"
+              data-testid="correct-answer"
+              key={ correctAnswer }
+              onClick={ (event) => this.handleClick(event, difficulty) }
+              className="answer-btn"
+              disabled={ buttonDisable }
+            >
+              {correctAnswer}
+            </button>
+          </div>
+        );
       }
       return (
-        <button
-          name="incorrect"
-          type="button"
-          data-testid={ `wrong-answer-${index}` }
-          key={ incorrectAnswers[index] }
-          onClick={ (event) => this.handleClick(event, difficulty) }
-          className={ `${incorrect} answer-btn` }
-          disabled={ buttonDisable }
-        >
-          {incorrectAnswers[index]}
-        </button>);
+        <div key={ incorrectAnswers[index] } className={ `${incorrect}` }>
+          <button
+            name="incorrect"
+            type="button"
+            data-testid={ `wrong-answer-${index}` }
+            onClick={ (event) => this.handleClick(event, difficulty) }
+            className="answer-btn"
+            disabled={ buttonDisable }
+          >
+            {incorrectAnswers[index]}
+          </button>
+        </div>);
     });
   }
 
@@ -191,14 +197,14 @@ class Game extends Component {
                 className="question-category"
                 data-testid="question-category"
               >
-                {questionResults[index].category}
+                {he.decode(questionResults[index].category)}
 
               </p>
               <p
                 className="question-text"
                 data-testid="question-text"
               >
-                {questionResults[index].question}
+                {he.decode(questionResults[index].question)}
 
               </p>
             </div>

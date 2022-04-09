@@ -7,11 +7,16 @@
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
 }
-.App {
+body {
   text-align: center;
-  background-color: #362736;
   height: 100vh;
   color: #E3BAC6;
+  background-color: #30172f;
+  opacity: 1;
+  background-image:  linear-gradient(135deg, #381a37 25%, transparent 25%), linear-gradient(225deg, #381a37 25%, transparent 25%), linear-gradient(45deg, #381a37 25%, transparent 25%), linear-gradient(315deg, #381a37 25%, #30172f 25%);
+  background-position:  13px 0, 13px 0, 0 0, 0 0;
+  background-size: 26px 26px;
+  background-repeat: repeat;
 }
 
 .App-logo {
@@ -95,7 +100,6 @@
 
 .App-header {
   align-items: center;
-  background-color: #4B244A;
   color: white;
   display: flex;
   flex-direction: column;
@@ -128,11 +132,12 @@
 }
 
 .correctAnswer {
-  border: 3px solid rgb(6, 240, 15);
+  background-color: rgb(6, 240, 15);
 }
 
 .incorrectAnswer {
-  border: 3px solid red;
+  background-color: red;
+  opacity: 0.5;
 }
 
 
@@ -182,6 +187,13 @@
   animation: tickAnimation 1s infinite;
 }
 
+.questions-container {
+  width: 95%;
+  height: fit-content;
+  margin: auto;
+  margin-bottom: 50px;
+}
+
 .question-category {
   font-size: calc(14px + 2vmin);
   margin-bottom: 15px;
@@ -192,6 +204,150 @@
   margin-bottom: 15px;
 }
 
+
+.answer-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 95vw;
+  padding: calc(1px + 2vmin);
+  background-color: #d6c0e0;
+  border-radius: 1.4vh;
+  height: fit-content;
+  margin: auto;
+  border-style: none;
+}
+
+.answer-options div {
+  width: 45%;
+  max-width: 45%;
+  height: 10vh;
+  margin: 4px 4px;
+  border-radius: 1.6vh;
+}
+
+.answer-btn {
+  width: 100%;
+  max-width: 100%;
+  height: 9.1vh;
+  font-size: calc(10px + 2vmin);
+  white-space: pre-line;
+}
+
+.answer-options div:nth-child(1) button {
+  background-color: #a51919;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.answer-options div:nth-child(2) button {
+  background-color: rgb(163, 161, 27);
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.answer-options div:nth-child(3) button {
+  background-color: #1927a5;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.answer-options div:nth-child(4) button {
+  background-color: #30a519;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.answer-options div:nth-child(1) button:disabled {
+  background-color: #751111;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+  
+}
+
+.answer-options div:nth-child(2) button:disabled  {
+  background-color: rgb(114, 112, 20);
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+  
+}
+
+.answer-options div:nth-child(3) button:disabled  {
+  background-color: #131e7a;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+  
+}
+
+.answer-options div:nth-child(4) button:disabled  {
+  background-color: #227411;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+  
+}
+
+.answer-options div:nth-child(1) button:hover{
+  background-color: #f52727;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.answer-options div:nth-child(2) button:hover {
+  background-color: rgb(241, 238, 38);
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.answer-options div:nth-child(3) button:hover {
+  background-color: #2a3ff5;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.answer-options div:nth-child(4) button:hover {
+  background-color: #47f025;
+  border-radius: 1.4vh;
+  border-style: none;
+  color: #161310;
+  font-weight: 600;
+}
+
+.btn-next {
+  padding: 16px 52px;
+  font-size: calc(14px + 2vmin);
+  font-weight: 600;
+  border-radius: 1.6vh;
+  border-style: none;
+  background-color: #2fc941;
+}
+
+.btn-next:hover {
+  background-color: #34e949;
+  color: #ffffff;
+}
+
 @keyframes tickAnimation {
   from { font-size: calc(44px + 2vmin); }
   to { font-size: calc(56px + 2vmin);};
@@ -200,6 +356,21 @@
 @media screen and (min-width: 768px ) {
   .questions-container {
     width: 60%;
+    height: fit-content;
+    margin: auto;
+    margin-bottom: 50px;
+  }
+
+  .answer-btn {
+    margin: auto;
+    font-size: calc(6px + 2vmin);
+  }
+
+  .answer-options {
+    width: 90%;
+    height: calc(30vh + 2vmin);
+    display: flex;
+    flex-wrap: wrap;
     margin: auto;
   }
 }
