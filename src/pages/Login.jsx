@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import logo from '../trivia.png';
+import logo from '../images/tryroot.svg';
 import { fetchToken, saveProfile, fetchQuestions, resetScore } from '../redux/actions';
 
 class Login extends React.Component {

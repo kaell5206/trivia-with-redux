@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 import { fetchQuestions, saveScore } from '../redux/actions';
+import right from '../images/green-checkmark.svg';
+import wrong from '../images/red-x.svg';
 
 const he = require('he');
 
@@ -22,6 +24,8 @@ class Game extends Component {
       buttonDisable: true,
       timer: maxTimer,
       codeInterval: 0,
+      pickAnswer: 'none',
+      test: 0,
     };
   }
 
@@ -73,10 +77,22 @@ class Game extends Component {
     clearInterval(codeInterval);
     if (target.name === 'correct') {
       sumScore(this.calculateScore(difficulty));
+      this.setState({
+        pickAnswer: 'right',
+        test: this.calculateScore(difficulty),
+      });
+    } else {
+      this.setState({
+        pickAnswer: 'wrong',
+      });
     }
   }
 
   nextQuestion = () => {
+    this.setState({
+      pickAnswer: 'none',
+      test: 0,
+    });
     const { index } = this.state;
     const { history } = this.props;
     const maxIndex = 4;
@@ -159,7 +175,7 @@ class Game extends Component {
               className="answer-btn"
               disabled={ buttonDisable }
             >
-              {correctAnswer}
+              {he.decode(correctAnswer)}
             </button>
           </div>
         );
@@ -174,22 +190,61 @@ class Game extends Component {
             className="answer-btn"
             disabled={ buttonDisable }
           >
-            {incorrectAnswers[index]}
+            {he.decode(incorrectAnswers[index])}
           </button>
         </div>);
     });
   }
 
-  render() {
+  renderCheck = () => {
     const { questionResults } = this.props;
-    const { index, next, timer } = this.state;
-    return (
-      <div>
-        <Header />
+    const { pickAnswer, test, index, next } = this.state;
+    if (pickAnswer === 'right') {
+      return (
         <div>
-          { this.timerWithColor() }
+          <img src={ right } alt="" />
+          <div>
+            <span>{ `+ ${test} pontos!` }</span>
+          </div>
+          {next
+       && (
+         <button
+           type="button"
+           data-testid="btn-next"
+           onClick={ this.nextQuestion }
+           className="btn-next"
+         >
+           Next
+
+         </button>)}
         </div>
-        { questionResults
+      );
+    }
+    if (pickAnswer === 'wrong') {
+      return (
+        <div>
+          <img src={ wrong } alt="" />
+          <div>
+            <span>{ `+ ${0} pontos!` }</span>
+          </div>
+          {next
+       && (
+         <button
+           type="button"
+           data-testid="btn-next"
+           onClick={ this.nextQuestion }
+           className="btn-next"
+         >
+           Next
+
+         </button>)}
+        </div>
+      );
+    }
+    if (pickAnswer === 'none') {
+      return (
+        <div>
+          { questionResults
         && (
           <div className="questions-container">
             <div className="question">
@@ -222,7 +277,7 @@ class Game extends Component {
             </div>
           </div>
         )}
-        {next
+          {next
        && (
          <button
            type="button"
@@ -233,6 +288,19 @@ class Game extends Component {
            Next
 
          </button>)}
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <Header />
+        <div>
+          { this.timerWithColor() }
+        </div>
+        { this.renderCheck() }
       </div>
     );
   }

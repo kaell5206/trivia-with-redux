@@ -13,9 +13,9 @@ body {
   color: #E3BAC6;
   background-color: #30172f;
   opacity: 1;
-  background-image:  linear-gradient(135deg, #381a37 25%, transparent 25%), linear-gradient(225deg, #381a37 25%, transparent 25%), linear-gradient(45deg, #381a37 25%, transparent 25%), linear-gradient(315deg, #381a37 25%, #30172f 25%);
-  background-position:  13px 0, 13px 0, 0 0, 0 0;
-  background-size: 26px 26px;
+  background-image:  linear-gradient(135deg, #381a37 25%, transparent 25%), linear-gradient(225deg, #381a37 25%, transparent 25%), linear-gradient(45deg, #381a37 25%, transparent 25%), linear-gradient(315deg, #381a37 25%, #692e67 25%);
+  background-position:  225px 0,225px 0, 0 0, 0 0;
+  background-size: 225px 225px;
   background-repeat: repeat;
 }
 
@@ -94,7 +94,7 @@ body {
 @media ( prefers-reduced-motion : no-preference ) {
 
   .App-logo {
-    animation: shake infinite 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+    animation: shake infinite 20s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
   }
 }
 
@@ -210,9 +210,8 @@ body {
   flex-wrap: wrap;
   justify-content: center;
   width: 95vw;
-  padding: calc(1px + 2vmin);
+  padding: calc(0px + 1vmin);
   background-color: #d6c0e0;
-  border-radius: 1.4vh;
   height: fit-content;
   margin: auto;
   border-style: none;
@@ -236,7 +235,6 @@ body {
 
 .answer-options div:nth-child(1) button {
   background-color: #a51919;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -244,7 +242,6 @@ body {
 
 .answer-options div:nth-child(2) button {
   background-color: rgb(163, 161, 27);
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -252,7 +249,6 @@ body {
 
 .answer-options div:nth-child(3) button {
   background-color: #1927a5;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -260,7 +256,6 @@ body {
 
 .answer-options div:nth-child(4) button {
   background-color: #30a519;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -268,7 +263,6 @@ body {
 
 .answer-options div:nth-child(1) button:disabled {
   background-color: #751111;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -277,7 +271,6 @@ body {
 
 .answer-options div:nth-child(2) button:disabled  {
   background-color: rgb(114, 112, 20);
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -286,7 +279,6 @@ body {
 
 .answer-options div:nth-child(3) button:disabled  {
   background-color: #131e7a;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -295,7 +287,6 @@ body {
 
 .answer-options div:nth-child(4) button:disabled  {
   background-color: #227411;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -304,7 +295,6 @@ body {
 
 .answer-options div:nth-child(1) button:hover{
   background-color: #f52727;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -312,7 +302,6 @@ body {
 
 .answer-options div:nth-child(2) button:hover {
   background-color: rgb(241, 238, 38);
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -320,7 +309,6 @@ body {
 
 .answer-options div:nth-child(3) button:hover {
   background-color: #2a3ff5;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -328,7 +316,6 @@ body {
 
 .answer-options div:nth-child(4) button:hover {
   background-color: #47f025;
-  border-radius: 1.4vh;
   border-style: none;
   color: #161310;
   font-weight: 600;
@@ -368,7 +355,7 @@ body {
 
   .answer-options {
     width: 90%;
-    height: calc(30vh + 2vmin);
+    height: fit-content;
     display: flex;
     flex-wrap: wrap;
     margin: auto;
