@@ -15,19 +15,23 @@ class Ranking extends Component {
   render() {
     const ranking = this.getPlayersRanking();
     return (
-      <div>
-        <h1 data-testid="ranking-title">Ranking</h1>
+      <div className="ranking_body">
+        <h1
+          data-testid="ranking-title"
+          className="ranking_title"
+        >
+          Ranking
+        </h1>
         {ranking.map((player, index) => (
-          <>
+          <div key={ index } className="ranking_player">
+            <img src={ player.picture } alt={ player.name } />
             <p data-testid={ `player-name-${index}` }>{player.name}</p>
             <p data-testid={ `player-score-${index}` }>{player.score}</p>
-            <img src={ player.picture } alt={ player.name } />
-          </>)) }
+          </div>)) }
         <br />
         <Link to="/">
           <button type="button" data-testid="btn-go-home">Home</button>
         </Link>
-
       </div>
     );
   }

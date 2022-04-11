@@ -36,18 +36,40 @@ class Feedback extends Component {
   render() {
     const { assertions, score } = this.props;
     return (
-      <div>
+      <div className="feedback_body">
         <Header />
-        <h1 data-testid="feedback-text">Feedback</h1>
-        <h2 data-testid="feedback-text">{ this.message() }</h2>
-        <h2 data-testid="feedback-total-score">{score}</h2>
-        <h2 data-testid="feedback-total-question">{ assertions }</h2>
+        <h1 data-testid="feedback-text" className="feedback_title">Feedback</h1>
+        <h2
+          data-testid="feedback-text"
+          className="feedback_message"
+        >
+          { this.message() }
+        </h2>
+        <h2 data-testid="feedback-total-score" className="feedback_score">{score}</h2>
+        <h2
+          data-testid="feedback-total-question"
+          className="total_question"
+        >
+          { `${assertions}/5` }
+        </h2>
         <br />
         <Link to="/">
-          <button type="button" data-testid="btn-play-again">Play Again</button>
+          <button
+            type="button"
+            data-testid="btn-play-again"
+            className="play_again"
+          >
+            Play Again
+          </button>
         </Link>
         <Link to="/ranking">
-          <button type="button" data-testid="btn-ranking">Ranking</button>
+          <button
+            type="button"
+            data-testid="btn-ranking"
+            className="ranking"
+          >
+            Ranking
+          </button>
         </Link>
 
       </div>

@@ -25,7 +25,7 @@ class Game extends Component {
       timer: maxTimer,
       codeInterval: 0,
       pickAnswer: 'none',
-      test: 0,
+      points: 0,
     };
   }
 
@@ -79,7 +79,7 @@ class Game extends Component {
       sumScore(this.calculateScore(difficulty));
       this.setState({
         pickAnswer: 'right',
-        test: this.calculateScore(difficulty),
+        points: this.calculateScore(difficulty),
       });
     } else {
       this.setState({
@@ -91,7 +91,7 @@ class Game extends Component {
   nextQuestion = () => {
     this.setState({
       pickAnswer: 'none',
-      test: 0,
+      points: 0,
     });
     const { index } = this.state;
     const { history } = this.props;
@@ -198,13 +198,13 @@ class Game extends Component {
 
   renderCheck = () => {
     const { questionResults } = this.props;
-    const { pickAnswer, test, index, next } = this.state;
+    const { pickAnswer, points, index, next } = this.state;
     if (pickAnswer === 'right') {
       return (
         <div className="correctAnswer">
-          <img src={ right } alt="resposta certa!" />
+          <img src={ right } alt="Right answer!" />
           <div className="points">
-            <span>{ `+  ${test}  pontos!` }</span>
+            <span>{ `+  ${points}  points!` }</span>
           </div>
           {next
        && (
@@ -223,12 +223,12 @@ class Game extends Component {
     if (pickAnswer === 'wrong') {
       return (
         <div className="incorrectAnswer">
-          <img src={ wrong } alt="resposta errada" />
-          <div className="points" >
-            <p>{ `${0}  pontos... ;(` }</p>
+          <img src={ wrong } alt="wrong answer." />
+          <div className="points">
+            <p>{ `${0}  points... ;(` }</p>
           </div>
           <p className="points">
-            {`A resposta certa era: ${he.decode(questionResults[index].correct_answer)}`}
+            {`The right answer was: ${he.decode(questionResults[index].correct_answer)}`}
           </p>
           {next
        && (
