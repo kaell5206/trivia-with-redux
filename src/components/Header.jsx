@@ -13,7 +13,7 @@ class Header extends Component {
         <div className="user-container">
           <img data-testid="header-profile-picture" src={ `https://www.gravatar.com/avatar/${imgGravatar}` } alt="" />
           <h3 data-testid="header-player-name">
-            user
+            {user}
           </h3>
         </div>
         <div className="score">

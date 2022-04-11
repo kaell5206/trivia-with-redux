@@ -201,10 +201,10 @@ class Game extends Component {
     const { pickAnswer, test, index, next } = this.state;
     if (pickAnswer === 'right') {
       return (
-        <div>
-          <img src={ right } alt="" />
-          <div>
-            <span>{ `+ ${test} pontos!` }</span>
+        <div className="correctAnswer">
+          <img src={ right } alt="resposta certa!" />
+          <div className="points">
+            <span>{ `+  ${test}  pontos!` }</span>
           </div>
           {next
        && (
@@ -222,11 +222,14 @@ class Game extends Component {
     }
     if (pickAnswer === 'wrong') {
       return (
-        <div>
-          <img src={ wrong } alt="" />
-          <div>
-            <span>{ `+ ${0} pontos!` }</span>
+        <div className="incorrectAnswer">
+          <img src={ wrong } alt="resposta errada" />
+          <div className="points" >
+            <p>{ `${0}  pontos... ;(` }</p>
           </div>
+          <p className="points">
+            {`A resposta certa era: ${he.decode(questionResults[index].correct_answer)}`}
+          </p>
           {next
        && (
          <button
@@ -244,6 +247,9 @@ class Game extends Component {
     if (pickAnswer === 'none') {
       return (
         <div>
+          <div>
+            { this.timerWithColor() }
+          </div>
           { questionResults
         && (
           <div className="questions-container">
@@ -295,11 +301,8 @@ class Game extends Component {
 
   render() {
     return (
-      <div>
+      <div className="game-body">
         <Header />
-        <div>
-          { this.timerWithColor() }
-        </div>
         { this.renderCheck() }
       </div>
     );

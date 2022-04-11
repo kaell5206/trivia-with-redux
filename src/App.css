@@ -10,10 +10,14 @@
 body {
   text-align: center;
   height: 100vh;
-  color: #E3BAC6;
-  background-color: #30172f;
+  color: #392d3d;
+  background-image: linear-gradient(120deg, #502e64, #883585 );
+}
+
+.game-body {
+  height: 100vh;
   opacity: 1;
-  background-image:  linear-gradient(135deg, #381a37 25%, transparent 25%), linear-gradient(225deg, #381a37 25%, transparent 25%), linear-gradient(45deg, #381a37 25%, transparent 25%), linear-gradient(315deg, #381a37 25%, #692e67 25%);
+  background-image:  linear-gradient(135deg, #ccfdff 25%, transparent 25%), linear-gradient(225deg, #ccfdff 25%, transparent 25%), linear-gradient(45deg, #ccfdff 25%, transparent 25%), linear-gradient(315deg, #ccfdff 25%, #ffffff 25%);
   background-position:  225px 0,225px 0, 0 0, 0 0;
   background-size: 225px 225px;
   background-repeat: repeat;
@@ -27,33 +31,25 @@ body {
 
 .login-container {
   position: relative;
+  width: 80vw;
 }
 
 .login-form-container {
   background-color: #E3BAC6;
+  width: 80vw;
   padding: 20px 28px;
   border-radius: 1.8vh;
   z-index: 99;
   position: relative;
 }
 
-.shadow {
-  padding: 80px 125px;
-  border-radius: 1.8vh;
-  background-color: #00000080;
-  position: absolute;
-  top: 10px;
-  filter: blur(0.4rem);
-  left: calc(2px + 2vmin);
-  bottom: calc(-26px + 2vmin);
-}
-
 .login-form-container label input {
   margin: 12px 8px;
-  padding: 6px;
+  padding: 10px;
   border-color: #6e356c7c;
   border-radius: 0.8vh;
-  
+  width: 90%;
+  font-size: calc(10px + 2vmin);
 }
 
 .login-form-container label input::placeholder {
@@ -63,12 +59,13 @@ body {
 
 .login-form-container a button {
   margin: 0 8px;
-  padding: 6px 14px;
+  padding: 8px 18px;
   font-weight: 600;
   color: #E3BAC6;
   background-color: #6e356c;
   border-style: none;
   border-radius: 0.8vh;
+
 }
 
 .login-form-container a button:disabled {
@@ -132,14 +129,25 @@ body {
 }
 
 .correctAnswer {
-  background-color: rgb(6, 240, 15);
+  margin: 120px 0;
 }
 
 .incorrectAnswer {
-  background-color: red;
-  opacity: 0.5;
+  margin: 120px 0;
 }
 
+
+.points {
+  display: flex;
+  justify-content: center;
+  color: #fff;
+  width: 70%;
+  font-size: calc(12px + 2vmin);
+  background-color: #1f223b;
+  margin: 20px auto;
+  padding: 10px 40px;
+  border: solid 5px #929292;
+}
 
 /* Game page css */
 
@@ -147,7 +155,7 @@ body {
   display: flex;
   justify-content: space-between;
   padding: 0 30px;
-  background-color: #4B244A;
+  background-color: #663164;
   align-items: center;
   color: #E3BAC6;
 }
@@ -172,7 +180,7 @@ body {
 }
 
 .red {
-  color: rgb(255, 0, 0);
+  color: rgb(184, 0, 0);
 }
 
 .timer  {
@@ -341,6 +349,31 @@ body {
 }
 
 @media screen and (min-width: 768px ) {
+  .correctAnswer {
+    margin: 60px 0;
+  }
+
+  .incorrectAnswer {
+    margin: 60px 0;
+  }
+
+  .points {
+    font-size: calc(6px + 2vmin);
+    width: 20%;
+  }
+
+  .login-container {
+    width: 100%;
+  }
+
+  .login-form-container {
+    width: 30%;
+    margin: auto;
+  }
+
+  .login-form-container label input {
+    font-size: calc(6px + 2vmin);
+  }
   .questions-container {
     width: 60%;
     height: fit-content;

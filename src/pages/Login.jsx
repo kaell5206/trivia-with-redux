@@ -97,7 +97,6 @@ class Login extends React.Component {
           <div className="shadow" />
         </section>
       </header>
-
     );
   }
 }
