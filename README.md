@@ -10,7 +10,7 @@ you can call your friends and family to see who gets the first rank in the ladde
 ## Installation
 
 ```bash
-  git clone //SSH LINK//
+  git clone git@github.com:kaell5206/trivia-with-redux.git
 
   cd trivia-with-redux
 
